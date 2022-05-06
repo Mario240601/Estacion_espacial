@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Espacio</title>
+	<script>
+		function espacio() {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function()
+			{
+				if (xhr.readyState==4 && xhr.status==200) {
+					var obj_txt =JSON.parse(xhr.responseText);
+					var obj_latitud = document.createElement("p")
+					var obj_longitud = document.createElement("p")
+					obj_longitud.innerHTML="longitud: "+ obj_txt.iss_position.longitude;
+					obj_latitud.innerHTML="latitud: " +obj_txt.iss_position.latitude;
+					document.getElementsByTagName('body')[0].appendChild(obj_latitud)
+	   			    document.getElementsByTagName('body')[0].appendChild(obj_longitud)
+
+				}
+			}
+			xhr.open("GET" , "http://api.open-notify.org/iss-now.json");
+			xhr.send();
+		}
+	
+
+	</script>
+</head>
+<body onload="espacio();">
+
+
+</body>
+</html>
